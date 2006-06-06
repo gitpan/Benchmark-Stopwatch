@@ -1,0 +1,9 @@
+Build.PL
+example.pl
+lib/Benchmark/Stopwatch.pm
+MANIFEST			This list of files
+t/laps.t
+t/load.t
+t/summary.t
+t/timing.t
+META.yml

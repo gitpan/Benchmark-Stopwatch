@@ -1,0 +1,24 @@
+---
+name: Benchmark-Stopwatch
+version: 0.01
+author:
+  - 'Edmund von der Burg <evdb@ecclestoad.co.uk>'
+abstract: simple timing of stages of your code.
+license: perl
+resources:
+  license: http://dev.perl.org/licenses/
+requires:
+  Carp: 0
+  Time::HiRes: 0
+build_requires:
+  Module::Build: 0
+  Test::LongString: 0
+  Test::More: 0
+provides:
+  Benchmark::Stopwatch:
+    file: lib/Benchmark/Stopwatch.pm
+    version: 0.01
+generated_by: Module::Build version 0.28
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.2.html
+  version: 1.2

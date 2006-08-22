@@ -3,7 +3,7 @@ use warnings;
 
 package Benchmark::Stopwatch;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use Time::HiRes;
 
@@ -118,13 +118,19 @@ sub stop {
 
     my $time_in_seconds = $stopwatch->total_time;
 
-Returns the time that the stopwatch ran for in fractional seconds.
+Returns the time that the stopwatch ran for in fractional seconds. If the
+stopwatch has not been stopped yet then it returns time it has been running
+for.
 
 =cut
 
 sub total_time {
     my $self = shift;
-    return $self->{stop} - $self->{start};
+
+    # Get the stop time or now if missing.
+    my $stop = $self->{stop} || $self->time;
+
+    return $stop - $self->{start};
 }
 
 =head2 summary

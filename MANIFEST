@@ -1,9 +1,11 @@
 Build.PL
+CHANGES
 example.pl
 lib/Benchmark/Stopwatch.pm
 MANIFEST			This list of files
+META.yml
 t/laps.t
 t/load.t
-t/summary.t
+t/output.t
 t/timing.t
-META.yml
+TODO

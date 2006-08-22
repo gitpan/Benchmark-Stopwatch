@@ -1,5 +1,6 @@
 use strict;
 use warnings;
+
 use Module::Build;
 
 my $builder = Module::Build->new(
@@ -11,10 +12,12 @@ my $builder = Module::Build->new(
     requires => {
         'Carp'        => 0,
         'Time::HiRes' => 0,
+        'Clone'       => 0,
     },
 
     build_requires => {
         'Module::Build'    => 0,
+        'Data::Dumper'     => 0,
         'Test::More'       => 0,
         'Test::LongString' => 0,
     },

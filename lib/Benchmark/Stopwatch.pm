@@ -3,9 +3,10 @@ use warnings;
 
 package Benchmark::Stopwatch;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use Time::HiRes;
+use Clone 'clone';
 
 =head1 NAME
 
@@ -183,22 +184,89 @@ sub summary {
     return $out;
 }
 
+=head2 as_data
+
+  my $data_structure_hashref = $stopwatch->as_data;
+
+Returns a data structure that contains all the information that was logged.
+This is so that you can use this module to gather the data but then use your
+own code to manipulate it.
+
+The returned hashref will look like this:
+
+  {
+    start_time => 1234500,  # The time the stopwatch was started
+    stop_time  => 1234510,  # The time it was stopped or as_data called
+    total_time => 10,       # The duration of timing
+    laps       => [
+        {
+            name       => 'test', # The name of the lap
+            time       => 1,      # The time of this lap (seconds)
+            cumulative => 1,      # seconds since start to this lap
+            fraction   => 0.10,   # fraction of total time.
+        },
+        {
+            name       => '_stop_',   # created as needed
+            time       => 9,
+            cumulative => 10,
+            fraction   => 0.9,
+        },
+    ],
+  }
+
+=cut 
+
+sub as_data {
+    my $self = shift;
+    my %data = ();
+
+    $data{start_time} = $self->{start};
+    $data{stop_time}  = $self->{stop} || $self->time;
+    $data{total_time} = $data{stop_time} - $data{start_time};
+
+    # Clone the events across and add the stop event.
+    $data{laps} = clone( $self->{events} );
+    push @{ $data{laps} }, { name => '_stop_', time => $data{stop_time} };
+
+    # For each entry in laps calculate the cumulative and the fraction.
+    my $running_total = 0;
+    my $last_time     = $data{start_time};
+    foreach my $lap ( @{ $data{laps} } ) {
+
+        my $this_time = delete $lap->{time};
+        $lap->{time} = $this_time - $last_time;
+        $last_time = $this_time;
+
+        $running_total += $lap->{time};
+        $lap->{cumulative} = $running_total;
+        $lap->{fraction}   = $lap->{time} / $data{total_time};
+    }
+
+    return \%data;
+}
+
 sub time {
     &{ $_[0]{_time} };
 }
 
 =head1 AUTHOR
 
-Edmund von der Burg C< <evdb@ecclestoad.co.uk> >
+Edmund von der Burg C<<evdb@ecclestoad.co.uk>>
 
-http://www.ecclestoad.co.uk
+L<http://www.ecclestoad.co.uk>
+
+=head1 ACKNOWLEDGMENTS
+
+Inspiration from my colleagues at L<http://www.nestoria.co.uk>
 
 =head1 COPYRIGHT
 
 Copyright (C) 2006 Edmund von der Burg. All rights reserved.
 
 This module is free software; you can redistribute it and/or modify it under
-the same terms as Perl itself.
+the same terms as Perl itself. If it breaks you get to keep both pieces.
+
+THERE IS NO WARRANTY.
 
 =cut
 

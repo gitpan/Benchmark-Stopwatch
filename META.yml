@@ -1,26 +1,17 @@
----
-name: Benchmark-Stopwatch
-version: 0.03
-author:
-  - 'Edmund von der Burg <evdb@ecclestoad.co.uk>'
-abstract: simple timing of stages of your code.
-license: perl
-resources:
-  license: http://dev.perl.org/licenses/
-requires:
-  Carp: 0
-  Clone: 0
-  Time::HiRes: 0
-build_requires:
-  Data::Dumper: 0
-  Module::Build: 0
-  Test::LongString: 0
-  Test::More: 0
-provides:
-  Benchmark::Stopwatch:
-    file: lib/Benchmark/Stopwatch.pm
-    version: 0.03
-generated_by: Module::Build version 0.28
+--- #YAML:1.0
+name:                Benchmark-Stopwatch
+version:             0.04
+abstract:            ~
+license:             ~
+generated_by:        ExtUtils::MakeMaker version 6.32
+distribution_type:   module
+requires:     
+    Carp:                          0
+    Clone:                         0
+    Data::Dumper:                  0
+    Test::LongString:              0
+    Test::More:                    0
+    Time::HiRes:                   0
 meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.2.html
-  version: 1.2
+    url:     http://module-build.sourceforge.net/META-spec-v1.2.html
+    version: 1.2

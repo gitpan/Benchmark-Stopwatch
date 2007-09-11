@@ -3,7 +3,7 @@ use warnings;
 
 package Benchmark::Stopwatch;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 use Time::HiRes;
 use Clone 'clone';

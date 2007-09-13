@@ -3,7 +3,7 @@ use warnings;
 
 package Benchmark::Stopwatch;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 use Time::HiRes;
 use Clone 'clone';
@@ -63,7 +63,7 @@ sub new {
     my $self  = {};
 
     $self->{events} = [];
-    $self->{_time}  = sub { Time::HiRes::time() };
+    $self->{_time} = sub { Time::HiRes::time() };
 
     return bless $self, $class;
 }

@@ -18,7 +18,7 @@ my @urls = (
 $sw->start;
 
 foreach my $url (@urls) {
-	print "Fetching '$url' ...\n";
+    print "Fetching '$url' ...\n";
     get($url);
     $sw->lap($url);
 }

@@ -63,5 +63,4 @@ is_deeply(
         ],
     },
     "as_data works."
-  )
-  || warn Dumper $sw->as_data;
+) || warn Dumper $sw->as_data;

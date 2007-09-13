@@ -14,7 +14,7 @@ foreach my $should_stop ( 0, 1 ) {
     my $start_pre = Time::HiRes::time;
     $sw->start;
     my $start_post = Time::HiRes::time;
-    my $total = 0;
+    my $total      = 0;
 
     # Twiddle thumbs....
     Time::HiRes::time for 1 .. 100;
@@ -22,7 +22,8 @@ foreach my $should_stop ( 0, 1 ) {
     my $min = Time::HiRes::time - $start_post;
 
     # If we should stop the watch then do so, otherwise just note down the time.
-    $should_stop ? $sw->stop : $total = $sw->total_time;
+    if   ($should_stop) { $sw->stop; }
+    else                { $total = $sw->total_time; }
 
     my $max = Time::HiRes::time - $start_pre;
 

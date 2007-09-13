@@ -1,5 +1,9 @@
 CHANGES.
 
+0.05 - Thu Sep 12 09:20:00 BST 2007
+
+  * Fixed a syntax issue in timing.t that was causing 5.6.2 to panic.
+
 0.04 - Tue Sep 11 22:20:01 BST 2007
 
    * Changed to MakeMaker
